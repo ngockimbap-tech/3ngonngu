@@ -10,7 +10,7 @@ int main() {
             if (d>0) {
                 float x1 = (-b+sqrt(d))/(2*a);
                 float x2 = (-b-sqrt(d))/(2*a);
-                printf("Phương trình có 2 nghiệm x1 = %f và x2 = %f", x1, x2);
+                printf("Phương trình có 2 nghiệm x1 = %.2f và x2 = %.2f", x1, x2);
             }
             else {
                 printf("Phương trình vô nghiệm");
@@ -18,13 +18,13 @@ int main() {
         }
         else {
             float x = -b/(2*a);
-            printf("Phương trình có nghiệm kép x = %f", x);
+            printf("Phương trình có nghiệm kép x = %.2f", x);
             }
         }
     else {
         if (b!=0) {
             float x = -c/b;
-            printf("Phương trình có 1 nghiệm x = %f", x);
+            printf("Phương trình có 1 nghiệm x = %.2f", x);
         }
         else {
             if (c!=0) {
