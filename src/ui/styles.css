@@ -1,0 +1,296 @@
+/* ===== Design tokens (lấy trực tiếp từ pixel của wireframe) ===== */
+:root {
+  --bg:         #F2F4F6;  /* nền trang */
+  --surface:    #FFFFFF;  /* card, ô nhập, header */
+  --surface-2:  #F7F8FA;  /* ô readonly, header bảng, badge */
+  --ink:        #263238;  /* chữ chính, gạch chân tab, toggle */
+  --ink-2:      #66727B;  /* chữ phụ, nhãn nhỏ */
+  --line:       #E3E7EA;  /* viền card, ô nhập, đường kẻ */
+  --line-badge: #DFE4E8;
+  --line-tab:   #DDE2E6;
+  --select:     #E5EDF3;  /* dòng đang chọn, nền nút */
+  --disabled:   #ECEFF1;  /* nút bị vô hiệu */
+  --radius:     6px;
+}
+
+html, body, .stApp, .stApp * {
+  font-family: "Segoe UI", Inter, system-ui, -apple-system, sans-serif;
+}
+.stApp { background: var(--bg); color: var(--ink); }
+header[data-testid="stHeader"], [data-testid="stToolbar"], footer { display: none; }
+.block-container { max-width: 1920px; padding: 22px 40px 28px; }
+
+/* ===== Header ===== */
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #FFFFFF !important;
+  border-bottom: 1px solid var(--line) !important;
+
+  margin-top: -40px !important;    /* Đẩy ngược khối trắng lên che hết vệt trống */
+  border-top: none !important;     /* Xóa bỏ viền top nếu có */
+
+  margin-left: -40px !important;
+  margin-right: -40px !important;
+  padding: 8px 40px !important;
+  box-sizing: border-box !important;
+}
+.app-title { font-size: 30px; font-weight: 700; line-height: 1.15; margin: 0; color: var(--ink); }
+.app-sub   { font-size: 15px; color: var(--ink-2); margin-top: 4px; }
+.badge {
+  display: inline-block;
+  text-align: center;
+  padding: 8px 100px !important; /* Tăng padding trái/phải lên 48px để ô dài ra cân đối */
+  background: var(--bg);
+  border: 1px solid var(--line-tab);
+  border-radius: var(--radius);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+/* ===== Tabs ===== */
+[data-testid="stTabs"] [role="tablist"] {
+  gap: 12px !important; background: transparent !important;
+}
+
+[data-testid="stTab"] {
+  position: relative !important;
+  display: flex !important; align-items: center !important;
+  justify-content: flex-start !important;
+  width: 287px !important; height: 44px !important;
+  padding: 0 16px !important;
+  margin-top: 16px !important;
+  background: var(--bg) !important;
+  border: 1px solid var(--line-tab) !important;
+  border-radius: var(--radius) !important;
+}
+[data-testid="stTab"] p {
+  font-size: 18px !important;
+  font-weight: 400 !important;
+  color: var(--ink) !important;
+}
+[data-testid="stTab"][aria-selected="true"] {
+  background: var(--surface) !important;
+}
+[data-testid="stTab"][aria-selected="true"] p {
+  font-weight: 700 !important;
+}
+
+/* thanh gạch dưới của tab đang chọn */
+[data-testid="stTab"] .react-aria-SelectionIndicator {
+  position: absolute !important;
+  left: 8px !important; right: 8px !important; bottom: 0 !important;
+  width: auto !important; height: 3px !important;
+  background: var(--ink) !important;
+  border: none !important;
+}
+
+/* ===== Card ===== */
+[data-testid="stVerticalBlock"]:has(> [data-testid="stElementContainer"]
+  :is(.card-title, .banner, .run-title, .zone-main, .lock-title, .sum-title)),
+[data-testid="stLayoutWrapper"]:has(> [data-testid="stVerticalBlock"] > [data-testid="stElementContainer"]
+  :is(.card-title, .banner, .run-title, .zone-main, .lock-title, .sum-title)) {
+  background: var(--surface) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: none !important;
+}
+.card-title {
+  font-size: 20px; font-weight: 700; padding-bottom: 6px; margin-bottom: 8px;
+  border-bottom: 1px solid var(--line); color: var(--ink);
+}
+.hint { font-size: 14px; color: var(--ink-2); margin: 2px 0 0; }
+.banner { font-size: 18px; font-weight: 700; margin: 0; }
+
+/* ===== Bảng danh sách cấu hình ===== */
+.cfg-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.cfg-table th {
+  background: var(--surface-2); text-align: left; padding: 8px 8px;
+  font-size: 13.5px; font-weight: 700; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+}
+.cfg-table th small { display: block; font-size: 12px; font-weight: 400; color: var(--ink-2); }
+.cfg-table td { padding: 11px 8px; font-size: 18px; border-bottom: 1px solid var(--line); }
+.cfg-table tr.sel td { background: var(--select); }
+
+/* ===== Nhãn + ô nhập ===== */
+[data-testid="stWidgetLabel"] p { font-size: 14px; color: var(--ink-2); }
+[data-testid="stNumberInput"] button { display: none; }
+[data-baseweb="input"], [data-baseweb="base-input"], [data-baseweb="select"] > div {
+  background: var(--surface) !important; border-radius: 4px;
+}
+[data-baseweb="input"] { border: 1px solid var(--line) !important; }
+[data-baseweb="input"] input { font-size: 18px; color: var(--ink); height: 36px; padding: 0 12px; }
+[data-baseweb="input"][aria-disabled="true"], [data-baseweb="input"]:has(input:disabled) { background: var(--surface-2) !important; }
+[data-baseweb="input"]:has(input:disabled) input { -webkit-text-fill-color: var(--ink); }
+[data-baseweb="input"]:focus-within { border-color: var(--ink) !important; box-shadow: none; }
+[data-baseweb="select"] > div { border: 1px solid var(--line); min-height: 36px; }
+
+/* ===== Toggle ===== */
+[data-testid="stCheckbox"] [role="checkbox"][aria-checked="true"],
+[data-baseweb="checkbox"] > div:first-child { background: var(--ink) !important; }
+
+/* ===== Nút ===== */
+.stButton > button {
+  width: 100%; height: 40px; border-radius: var(--radius);
+  background: var(--select); border: 1px solid var(--line);
+  color: var(--ink); box-shadow: none;
+}
+.stButton > button * {
+  font-size: 14px;
+  font-weight: 700 !important;
+}
+.stButton > button:hover { background: #D9E4EC; border-color: var(--line-tab); color: var(--ink); }
+.stButton > button:disabled { background: var(--disabled); border-color: var(--line-tab); color: var(--ink-2); opacity: 1; }
+.st-key-btn_delete button, .st-key-btn_cancel button, .st-key-btn_confirm button {
+  background: var(--surface); border: 1px solid var(--line-tab);
+}
+.st-key-btn_delete button:disabled { background: var(--surface); color: var(--ink-2); }
+
+/* ===== Validation ===== */
+.err-list { margin: 4px 0 0; padding-left: 18px; font-size: 14px; color: var(--ink); }
+.err-list li { margin: 2px 0; }
+.ok-line { font-size: 14px; color: var(--ink-2); }
+.foot { font-size: 14px; color: var(--ink-2); margin: 4px 0 0; }
+
+/* ===================== TAB 2: Mô phỏng và phân tích ===================== */
+/* màu riêng của bản đồ & biểu đồ (lấy từ pixel wireframe):
+   đường #E1E5E8 · lõi giao lộ #F6F7F8 · nét đứt #9DA7AE
+   APPROACHING #D9E3EB/#808B92 · STOPPED #6D7982/#49555D · CROSSING #91B5AD/#5B7372
+   đèn xanh #40805B · đèn đỏ #AA4A4A · đường biểu đồ #738795 · cột #839EAA #B5BFC6 #9CABB5 */
+
+.stDownloadButton > button {
+  width: 100%; height: 40px; border-radius: var(--radius);
+  background: var(--select); border: 1px solid var(--select);
+  color: var(--ink); font-size: 16px; font-weight: 700; box-shadow: none;
+}
+.stDownloadButton > button:hover { background: #D9E4EC; border-color: #D9E4EC; color: var(--ink); }
+.stDownloadButton > button:disabled { background: var(--disabled); border-color: var(--disabled); color: var(--ink-2); opacity: 1; }
+
+.run-title { font-size: 20px; font-weight: 700; line-height: 1.3; }
+.run-sub   { font-size: 17px; color: var(--ink-2); margin-top: 2px; }
+
+.status-box {
+  background: var(--surface-2); border: 1px solid var(--line-badge); border-radius: var(--radius);
+  height: 40px; display: flex; align-items: center; padding: 0 20px; font-size: 16px;
+}
+
+/* bản đồ + chú giải */
+.map-wrap { display: flex; align-items: flex-start; gap: 36px; }
+.map-wrap svg { flex: none; display: block; }
+.legend { padding-top: 6px; }
+.lg-title { font-size: 19px; font-weight: 700; margin-bottom: 10px; }
+.lg-row { display: flex; align-items: center; gap: 14px; font-size: 16px; margin-bottom: 12px; }
+.sw { width: 24px; height: 16px; border-radius: 3px; border: 1.5px solid; box-sizing: border-box; }
+.lg-phase { font-size: 17px; font-weight: 700; line-height: 1.45; margin: 18px 0 14px; }
+.lg-note { font-size: 15px; color: var(--ink-2); line-height: 1.6; margin-bottom: 12px; }
+
+.zone-main { font-size: 17px; font-weight: 700; }
+.zone-sub  { font-size: 14.5px; color: var(--ink-2); margin-top: 6px; }
+
+/* ô số liệu */
+.m-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+.m-label { font-size: 14px; color: var(--ink-2); }
+.m-value { font-size: 24px; font-weight: 700; line-height: 1.25; }
+.m-value.lg { font-size: 28px; }
+.m-sub { font-size: 13px; color: var(--ink-2); margin-top: 2px; }
+.ctr-cell { font-size: 16.5px; font-weight: 700; }
+.ctr-note { font-size: 13.5px; color: var(--ink-2); margin-top: 6px; }
+.lock-title { font-size: 19px; font-weight: 700; }
+.lock-sub { font-size: 14px; color: var(--ink-2); margin-top: 4px; }
+.sum-title { font-size: 17px; font-weight: 700; }
+.sum-sub { font-size: 14.5px; color: var(--ink-2); margin-top: 6px; }
+
+/* biểu đồ */
+.chart-cap { font-size: 12.5px; color: var(--ink-2); letter-spacing: .2px; margin-bottom: 2px; }
+.ct { font-size: 13px; fill: var(--ink-2); font-family: "Segoe UI", Inter, system-ui, sans-serif; }
+.cv { font-size: 13px; fill: var(--ink); font-family: "Segoe UI", Inter, system-ui, sans-serif; }
+
+/* ===================== Bổ sung cho bản chạy thật ===================== */
+.field-err { font-size: 13px; color: #AA4A4A; margin: -4px 0 6px; line-height: 1.35; }
+.empty-row { padding: 14px 8px !important; color: var(--ink-2); font-size: 16px !important; }
+.st-key-sim_reset_cancel button, .st-key-sim_reset_confirm button {
+  background: var(--surface); border: 1px solid var(--line);
+}
+[data-testid="stPlotlyChart"] { background: transparent; }
+.stDownloadButton { margin-top: 6px; }
+
+/* viền cho ô nhập: lớp bọc trực tiếp của thẻ input */
+div:has(> input[type="text"]),
+div:has(> input[type="number"]),
+div:has(> input[type="password"]) {
+  border: 1px solid #D0D6DB !important;
+  border-radius: 4px !important;
+}
+div:has(> input:disabled) {
+  background: var(--surface-2) !important;
+  border-color: var(--line) !important;
+}
+div:has(> input:focus) {
+  border-color: var(--ink) !important;
+}
+
+/* ===== Header cố định khi cuộn ===== */
+[data-testid="stElementContainer"]:has(.header-container) {
+  position: sticky !important;
+  top: 40px !important;
+  z-index: 999 !important;
+}
+.header-container {
+  background-color: #FFFFFF !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Fix lỗi Sumary cuối phiên */
+[data-testid="stColumn"] > [data-testid="stVerticalBlock"] > [data-testid="stLayoutWrapper"]
+  > [data-testid="stVerticalBlock"]:has(> [data-testid="stLayoutWrapper"] > [data-testid="stHorizontalBlock"] .sum-title) {
+  background: var(--surface) !important;
+  border-radius: var(--radius) !important;
+}
+.stDownloadButton > button *,
+[data-testid="stDownloadButton"] button * {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+}
+.stDownloadButton > button,
+[data-testid="stDownloadButton"] button {
+  border: 1px solid var(--line-tab) !important;
+}
+.stDownloadButton > button:hover,
+[data-testid="stDownloadButton"] button:hover {
+  border-color: #C5CED5 !important;
+}
+.stDownloadButton > button:disabled,
+[data-testid="stDownloadButton"] button:disabled {
+  border-color: var(--line-tab) !important;
+}
+
+/* ===== Header: nền trắng + bóng phủ hết bề ngang, mọi mức zoom ===== */
+.header-container {
+  position: relative !important;
+  isolation: isolate !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-bottom: none !important;
+}
+.header-container::before {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  z-index: -1;
+}
+[data-testid="stMain"]::-webkit-scrollbar { display: none; }
+[data-testid="stMain"] { scrollbar-width: none; }
+
+/* bù 16px mà Streamlit trừ đi ở cuối khối markdown, để chữ cuối không tràn viền dưới */
+.m-grid, .zone-sub, .lock-sub, .sum-sub, .ctr-note {
+  padding-bottom: 16px;
+}
