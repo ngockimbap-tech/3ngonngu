@@ -1,0 +1,38 @@
+#include <stdio.h>
+
+int tam_giac (float a, float b, float c);
+void loai_tam_giac (float a, float b, float c);
+
+int main() {
+    float a, b, c;
+    scanf("%f %f %f", &a, &b, &c);
+    
+    int tam_giac(float a, float b, float c) {
+        if ((a + b > c) && (a + c > b) && (b + c > a)) {
+            return 1;
+        }
+        return 0;
+    }
+    
+    void loai_tam_giac(float a, float b, float c) {
+        if (tam_giac(a, b, c) == 0) {
+            printf("Không phải là tam giác.");
+        }
+        else if ((a == b) && (a == c) && (b == c)) {
+            printf("Đây là tam giác đều.");
+        }
+        else if ((a == b) || (a == c) || (b == c)) {
+            printf("Đây là tam giác cân.");
+        }
+        else if ((a*a + b*b == c*c) || (a*a + c*c == b*b) || (b*b + c*c == a*a)) {
+            printf("Đây là tam giác vuông.");
+        }
+        else {printf("Đây là tam giác thường.");}
+    }
+    
+    loai_tam_giac(a, b, c);
+    
+    return 0;
+
+}
+
