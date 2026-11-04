@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int divisible (int n, int m) {
+long long divisible (long long n, long long m) {
 	    return n / m;
 	}
 
@@ -23,12 +23,12 @@ long long lcm(long long a, long long b) {
 }
 
 int main() {
-	int n, a, b;
-	scanf("%d %d %d", &n, &a, &b);
+	long long n, a, b;
+	scanf("%lld %lld %lld", &n, &a, &b);
 	
-	int result = divisible(n, a) + divisible(n, b) - divisible(n, lcm(a,b));
+	long long result = divisible(n, a) + divisible(n, b) - divisible(n, lcm(a,b));
 	
-	printf("%d", result);
+	printf("%lld", result);
 
 }
 
